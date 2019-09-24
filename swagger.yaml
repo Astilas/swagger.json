@@ -1,0 +1,519 @@
+swagger: "2.0"
+host: "localhost:8080"
+basePath: "/"
+schemes: 
+ - 
+   http
+info: 
+ title: "Koinju API Documentation"
+ version: "1.0.0"
+tags: 
+paths: 
+ "/crypto-data": 
+  get: 
+   summary: "Crypto data endpoint"
+   operationId: getCryptodata
+   description: "Returns data about crypto currencies"
+   tags: 
+    - 
+   cryptos
+   responses: 
+    default: 
+     schema: 
+      type: string
+     description: Successful
+ "/global-data": 
+  get: 
+   summary: "Global data endpoint"
+   operationId: getGlobaldata
+   description: "Returns global data of crypto currencies market"
+   tags: 
+    - 
+   global
+   responses: 
+    default: 
+     schema: 
+      type: string
+     description: Successful
+ "/instruments": 
+  get: 
+   summary: "All exchange instruments"
+   operationId: getInstruments
+   description: "Returns all current available instruments for all exchanges"
+   tags: 
+    - 
+   instruments
+   responses: 
+    200: 
+     schema: 
+      "$ref": "#/definitions/Instruments%20of%20all%20exchanges"
+     description: Successful
+ "/status": 
+  get: 
+   summary: "API status"
+   operationId: getStatus
+   description: "Returns the current status of the API"
+   tags: 
+    - 
+   status
+   responses: 
+    200: 
+     schema: 
+      "$ref": "#/definitions/Server%20status"
+     description: Successful
+ "/instruments/{exchange}": 
+  get: 
+   summary: "Exchange instruments"
+   operationId: getInstrumentsExchange
+   description: "Returns all current available instruments for an exchange"
+   parameters: 
+    - 
+   type: string
+     description: "Exchange name"
+     name: exchange
+     in: path
+     required: true
+   tags: 
+    - 
+   instruments
+   responses: 
+    200: 
+     schema: 
+      "$ref": "#/definitions/Instruments%20of%20an%20exchange"
+     description: Successful
+ "/ticker/{exchange}/{instrument}": 
+  get: 
+   summary: "Market ticker"
+   operationId: getTickerExchangeInstrument
+   description: "Returns last trade of provided exchange/instrument pair"
+   parameters: 
+    - 
+   type: string
+     description: "Exchange name"
+     name: exchange
+     in: path
+     required: true
+    - 
+   type: string
+     description: "Market name"
+     name: instrument
+     in: path
+     required: true
+   tags: 
+    - 
+   ticker
+   responses: 
+    200: 
+     schema: 
+      "$ref": "#/definitions/Ticker"
+     description: Successful
+ "/orderbook/{exchange}/{instrument}/{timestamp}": 
+  get: 
+   summary: "Market order book"
+   operationId: getOrderbookExchangeInstrumentTimestamp
+   description: "Returns the requested order book"
+   parameters: 
+    - 
+   type: string
+     description: "Exchange name"
+     name: exchange
+     in: path
+     required: true
+    - 
+   type: string
+     description: "Market name"
+     name: instrument
+     in: path
+     required: true
+    - 
+   type: string
+     description: "Default is the query timestamp"
+     name: timestamp
+     in: path
+   tags: 
+    - 
+   orderbook
+   responses: 
+    200: 
+     schema: 
+      "$ref": "#/definitions/Order%20book"
+     description: Successful
+ "/candle/current/{exchange}/{instrument}/{timeframe}": 
+  get: 
+   summary: "Current candle"
+   operationId: getCandleCurrentExchangeInstrumentTimeframe
+   description: "Returns current unfinished candle for provided exchange/instrument pair"
+   parameters: 
+    - 
+   type: string
+     description: "Exchange name"
+     name: exchange
+     in: path
+     required: true
+    - 
+   type: string
+     description: "Market name"
+     name: instrument
+     in: path
+     required: true
+    - 
+   type: string
+     description: "'15s', '1m', '5m', '30m', '1h', '2h', '4h', '8h', '1d'. Default is '1m'"
+     name: timeframe
+     in: path
+   tags: 
+    - 
+   candle
+   responses: 
+    200: 
+     schema: 
+      "$ref": "#/definitions/Current%20candle"
+     description: Successful
+ "/candle/{exchange}/{instrument}/{timeframe}/{timestamp}": 
+  get: 
+   summary: "Historical candle"
+   operationId: getCandleExchangeInstrumentTimeframeTimestamp
+   description: "Returns candle for provided exchange/instrument pair"
+   parameters: 
+    - 
+   type: string
+     description: "Exchange name"
+     name: exchange
+     in: path
+     required: true
+    - 
+   type: string
+     description: "Market name"
+     name: instrument
+     in: path
+     required: true
+    - 
+   type: string
+     description: "'15s', '1m', '5m', '30m', '1h', '2h', '4h', '8h', '1d'. Default is '1m'"
+     name: timeframe
+     in: path
+    - 
+   type: number
+     description: "Default is the query timestamp"
+     name: timestamp
+     in: path
+   tags: 
+    - 
+   candle
+   responses: 
+    200: 
+     schema: 
+      "$ref": "#/definitions/Historical%20candle"
+     description: Successful
+definitions: 
+ Model1: 
+  type: object
+ "Instruments of all exchanges": 
+  type: array
+  example: 
+   - 
+   exchange: kraken
+    instruments: 
+     - 
+   "XBT-USD"
+     - 
+   "ETH-USD"
+   - 
+   exchange: binance
+    instruments: 
+     - 
+   "BTC-USD"
+     - 
+   "ETH-USD"
+  items: 
+   "$ref": "#/definitions/Model1"
+ "Server status": 
+  type: object
+  example: 
+   version: "1.0.0"
+   delay: "0 ms"
+   serverTime: 1561560616173
+  properties: 
+   version: 
+    type: string
+   delay: 
+    type: string
+   serverTime: 
+    type: number
+ instruments: 
+  type: array
+  example: 
+   - 
+   "XBT-USD"
+   - 
+   "ETH-USD"
+  items: 
+   type: string
+ "Instruments of an exchange": 
+  type: object
+  properties: 
+   exchange: 
+    type: string
+    example: kraken
+   instruments: 
+    "$ref": "#/definitions/instruments"
+ Ticker: 
+  type: object
+  properties: 
+   exchange: 
+    type: string
+    example: kraken
+   instrument: 
+    type: string
+    example: "XBT-USD"
+   timestamp: 
+    type: number
+    example: 1569251101081
+   price: 
+    type: number
+    example: 12345.8
+ Model2: 
+  type: array
+  items: 
+   type: string
+ bids: 
+  type: array
+  description: "[orderId, rate, amount, lastUpdateTimestamp]"
+  example: 
+   - 
+   - 
+   fryg6835xriu46g
+    - 
+   35778.4
+    - 
+   53546.8
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+   - 
+   - 
+   gguey3656623788
+    - 
+   98532
+    - 
+   35778.4
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+   - 
+   - 
+   08rebfry3256456
+    - 
+   45233.1
+    - 
+   45233.1
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+   - 
+   - 
+   vygu654rgg996hj
+    - 
+   53546
+    - 
+   98532.5
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+  items: 
+   "$ref": "#/definitions/Model2"
+ asks: 
+  type: array
+  description: "[orderId, rate, amount, lastUpdateTimestamp]"
+  example: 
+   - 
+   - 
+   fryg6835xriu46g
+    - 
+   35778.4
+    - 
+   98532.8
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+   - 
+   - 
+   gguey3656623788
+    - 
+   98532
+    - 
+   45233.4
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+   - 
+   - 
+   08rebfry3256456
+    - 
+   45233.1
+    - 
+   35778.1
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+   - 
+   - 
+   vygu654rgg996hj
+    - 
+   53546
+    - 
+   53546.5
+    - 
+   "Mon Sep 23 2019 17:05:01 GMT+0200 (GMT+02:00)"
+  items: 
+   "$ref": "#/definitions/Model2"
+ "Order book": 
+  type: object
+  properties: 
+   exchange: 
+    type: string
+    description: "Exchange name"
+    example: kraken
+   instrument: 
+    type: string
+    description: "Market name"
+    example: "XBT-USD"
+   bids: 
+    "$ref": "#/definitions/bids"
+   asks: 
+    "$ref": "#/definitions/asks"
+ volume: 
+  type: object
+  properties: 
+   home: 
+    type: number
+    example: 1.16148216
+   foreign: 
+    type: number
+    example: 14510.74849964
+ twap: 
+  type: object
+  properties: 
+   mult: 
+    type: number
+    example: 0
+   div: 
+    type: number
+    example: 0
+   val: 
+    type: number
+    example: 0
+ vwap: 
+  type: object
+  properties: 
+   mult: 
+    type: number
+    example: 27.67362374979125
+   div: 
+    type: number
+    example: 1.16148216
+   val: 
+    type: number
+    example: 0
+ "$meta": 
+  type: object
+  properties: 
+   isClosed: 
+    type: boolean
+    example: false
+   closedTime: 
+    type: string
+    example: ""
+ "Current candle": 
+  type: object
+  properties: 
+   exchange: 
+    type: string
+    example: kraken
+   instrument: 
+    type: string
+    example: "XBT-USD"
+   timeframe: 
+    type: string
+    example: 1m
+   open: 
+    type: number
+    example: 12493
+   high: 
+    type: number
+    example: 12498.9
+   low: 
+    type: number
+    example: 12488.9
+   close: 
+    type: number
+    example: 12499.2
+   volume: 
+    "$ref": "#/definitions/volume"
+   timestamp: 
+    type: string
+    example: "2019-06-26T09:35:00.000Z"
+   timestampEndOfFrame: 
+    type: string
+    example: "2019-06-26T09:40:00.000Z"
+   unixValue: 
+    type: number
+    example: 1561541700
+   _id: 
+    type: string
+    example: "kraken/XBT/USD/5m/2019/06/26/2019-06-26T09:35:00.000Z"
+   twap: 
+    "$ref": "#/definitions/twap"
+   vwap: 
+    "$ref": "#/definitions/vwap"
+   "$meta": 
+    "$ref": "#/definitions/%24meta"
+ Model3: 
+  type: object
+  properties: 
+   isClosed: 
+    type: boolean
+    example: true
+   closedTime: 
+    type: string
+    example: "2019-06-26T09:40:00.005Z"
+   sig: 
+    type: string
+    example: 8e167570d97024f1b52e3398ad1d683331242439
+ "Historical candle": 
+  type: object
+  properties: 
+   exchange: 
+    type: string
+    example: kraken
+   instrument: 
+    type: string
+    example: "XBT-USD"
+   timeframe: 
+    type: string
+    example: 1m
+   open: 
+    type: number
+    example: 12493
+   high: 
+    type: number
+    example: 12498.9
+   low: 
+    type: number
+    example: 12488.9
+   close: 
+    type: number
+    example: 12499.2
+   volume: 
+    "$ref": "#/definitions/volume"
+   timestamp: 
+    type: string
+    example: "2019-06-26T09:35:00.000Z"
+   timestampEndOfFrame: 
+    type: string
+    example: "2019-06-26T09:40:00.000Z"
+   unixValue: 
+    type: number
+    example: 1561541700
+   _id: 
+    type: string
+    example: "kraken/XBT/USD/5m/2019/06/26/2019-06-26T09:35:00.000Z"
+   twap: 
+    "$ref": "#/definitions/twap"
+   vwap: 
+    "$ref": "#/definitions/vwap"
+   "$meta": 
+    "$ref": "#/definitions/Model3"
