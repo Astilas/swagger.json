@@ -62,26 +62,28 @@
 						},
 						"description": "Successful"
 					},
-					"application/json": {
-						"type": "array",
-						"example": [
-							{
-								"exchange": "kraken",
-								"instruments": [
-									"XBT-USD",
-									"ETH-USD"
-								]
-							},
-							{
-								"exchange": "binance",
-								"instruments": [
-									"BTC-USD",
-									"ETH-USD"
-								]
+					"content": {
+						"application/json": {
+							"type": "array",
+							"example": [
+								{
+									"exchange": "kraken",
+									"instruments": [
+										"XBT-USD",
+										"ETH-USD"
+									]
+								},
+								{
+									"exchange": "binance",
+									"instruments": [
+										"BTC-USD",
+										"ETH-USD"
+									]
+								}
+							],
+							"items": {
+								"$ref": "#/definitions/Model1"
 							}
-						],
-						"items": {
-							"type": "object"
 						}
 					}
 				}
