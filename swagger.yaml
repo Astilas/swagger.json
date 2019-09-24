@@ -21,7 +21,7 @@ paths:
       tags:
       - cryptos
       responses:
-        default:
+        Default:
           schema:
             type: string
           description: Successful
@@ -37,7 +37,7 @@ paths:
       tags:
       - global
       responses:
-        default:
+        Default:
           schema:
             type: string
           description: Successful
