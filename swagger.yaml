@@ -7,16 +7,13 @@ schemes:
 info: 
  title: "Koinju API Documentation"
  version: "1.0.0"
-tags: 
+
 paths: 
  "/crypto-data": 
   get: 
    summary: "Crypto data endpoint"
    operationId: getCryptodata
    description: "Returns data about crypto currencies"
-   tags: 
-    - 
-   cryptos
    responses: 
     200:
     default: 
@@ -28,9 +25,6 @@ paths:
    summary: "Global data endpoint"
    operationId: getGlobaldata
    description: "Returns global data of crypto currencies market"
-   tags: 
-    - 
-   global
    responses: 
     200:
     default: 
@@ -42,9 +36,6 @@ paths:
    summary: "All exchange instruments"
    operationId: getInstruments
    description: "Returns all current available instruments for all exchanges"
-   tags: 
-    - 
-   instruments
    responses: 
     200: 
      schema: 
@@ -55,9 +46,6 @@ paths:
    summary: "API status"
    operationId: getStatus
    description: "Returns the current status of the API"
-   tags: 
-    - 
-   status
    responses: 
     200: 
      schema: 
@@ -75,9 +63,6 @@ paths:
      name: exchange
      in: path
      required: true
-   tags: 
-    - 
-   instruments
    responses: 
     200: 
      schema: 
@@ -101,9 +86,6 @@ paths:
      name: instrument
      in: path
      required: true
-   tags: 
-    - 
-   ticker
    responses: 
     200: 
      schema: 
@@ -132,9 +114,6 @@ paths:
      description: "Default is the query timestamp"
      name: timestamp
      in: path
-   tags: 
-    - 
-   orderbook
    responses: 
     200: 
      schema: 
@@ -163,9 +142,6 @@ paths:
      description: "'15s', '1m', '5m', '30m', '1h', '2h', '4h', '8h', '1d'. Default is '1m'"
      name: timeframe
      in: path
-   tags: 
-    - 
-   candle
    responses: 
     200: 
      schema: 
@@ -199,9 +175,6 @@ paths:
      description: "Default is the query timestamp"
      name: timestamp
      in: path
-   tags: 
-    - 
-   candle
    responses: 
     200: 
      schema: 
