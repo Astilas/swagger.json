@@ -136,6 +136,10 @@ paths:
       summary: Market ticker
       operationId: getTickerExchangeInstrument
       description: Returns last trade of provided exchange/instrument pair
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
       - type: string
         description: Exchange name
@@ -152,13 +156,30 @@ paths:
       responses:
         '200':
           schema:
-            "$ref": "#/definitions/Ticker"
+            type: object
+            properties:
+              exchange:
+                type: string
+                example: kraken
+              instrument:
+                type: string
+                example: XBT-USD
+              timestamp:
+                type: number
+                example: 1569251101081
+              price:
+                type: number
+                example: 12345.8
           description: Successful
   "/orderbook/{exchange}/{instrument}/{timestamp}":
     get:
       summary: Market order book
       operationId: getOrderbookExchangeInstrumentTimestamp
       description: Returns the requested order book
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
       - type: string
         description: Exchange name
@@ -185,8 +206,11 @@ paths:
     get:
       summary: Current candle
       operationId: getCandleCurrentExchangeInstrumentTimeframe
-      description: Returns current unfinished candle for provided exchange/instrument
-        pair
+      description: Returns current unfinished candle for provided exchange/instrument pair
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
       - type: string
         description: Exchange name
@@ -215,6 +239,10 @@ paths:
       summary: Historical candle
       operationId: getCandleExchangeInstrumentTimeframeTimestamp
       description: Returns candle for provided exchange/instrument pair
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
       - type: string
         description: Exchange name
