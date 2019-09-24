@@ -14,6 +14,10 @@ paths:
       summary: Crypto data endpoint
       operationId: getCryptodata
       description: Returns data about crypto currencies
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
       - cryptos
       responses:
@@ -51,18 +55,7 @@ paths:
       responses:
         '200':
           schema:
-            type: array
-            example:
-            - exchange: kraken
-              instruments:
-              - XBT-USD
-              - ETH-USD
-            - exchange: binance
-              instruments:
-              - BTC-USD
-              - ETH-USD
-            items:
-              type: object
+            "$ref": "#/definitions/Instruments%20of%20all%20exchanges"
           description: Successful
   "/status":
     get:
@@ -78,25 +71,7 @@ paths:
       responses:
         '200':
           schema:
-            type: object
-            example:
-              version: 1.0.0
-              delay: 0 ms
-              serverTime: 1561560616173
-            properties:
-              version:
-                type: string
-              delay:
-                type: string
-              serverTime:
-                type: number
-          instruments:
-            type: array
-            example:
-            - XBT-USD
-            - ETH-USD
-            items:
-              type: string
+            "$ref": "#/definitions/Server%20status"
           description: Successful
   "/instruments/{exchange}":
     get:
@@ -118,18 +93,7 @@ paths:
       responses:
         '200':
           schema:
-            type: object
-            properties:
-              exchange:
-                type: string
-                example: kraken
-              instruments:
-                type: array
-                example:
-                  - XBT-USD
-                  - ETH-USD
-                items:
-                  type: string
+            "$ref": "#/definitions/Instruments%20of%20an%20exchange"
           description: Successful
   "/ticker/{exchange}/{instrument}":
     get:
@@ -156,20 +120,7 @@ paths:
       responses:
         '200':
           schema:
-            type: object
-            properties:
-              exchange:
-                type: string
-                example: kraken
-              instrument:
-                type: string
-                example: XBT-USD
-              timestamp:
-                type: number
-                example: 1569251101081
-              price:
-                type: number
-                example: 12345.8
+            "$ref": "#/definitions/Ticker"
           description: Successful
   "/orderbook/{exchange}/{instrument}/{timestamp}":
     get:
