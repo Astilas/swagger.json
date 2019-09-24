@@ -26,8 +26,12 @@ paths:
       summary: Global data endpoint
       operationId: getGlobaldata
       description: Returns global data of crypto currencies market
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
-        - global
+      - global
       responses:
         default:
           schema:
