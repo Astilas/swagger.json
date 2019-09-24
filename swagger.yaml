@@ -7,7 +7,7 @@ schemes:
 info:
   title: Koinju API Documentation
   version: 1.0.0
-tags: []
+tags:
 paths:
   "/crypto-data":
     get:
