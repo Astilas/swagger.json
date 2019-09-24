@@ -69,18 +69,44 @@ paths:
       summary: API status
       operationId: getStatus
       description: Returns the current status of the API
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
       - status
       responses:
         '200':
           schema:
-            "$ref": "#/definitions/Server%20status"
+            type: object
+            example:
+              version: 1.0.0
+              delay: 0 ms
+              serverTime: 1561560616173
+            properties:
+              version:
+                type: string
+              delay:
+                type: string
+              serverTime:
+                type: number
+          instruments:
+            type: array
+            example:
+            - XBT-USD
+            - ETH-USD
+            items:
+              type: string
           description: Successful
   "/instruments/{exchange}":
     get:
       summary: Exchange instruments
       operationId: getInstrumentsExchange
       description: Returns all current available instruments for an exchange
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
       - type: string
         description: Exchange name
@@ -92,7 +118,18 @@ paths:
       responses:
         '200':
           schema:
-            "$ref": "#/definitions/Instruments%20of%20an%20exchange"
+            type: object
+            properties:
+              exchange:
+                type: string
+                example: kraken
+              instruments:
+                type: array
+                example:
+                  - XBT-USD
+                  - ETH-USD
+                items:
+                  type: string
           description: Successful
   "/ticker/{exchange}/{instrument}":
     get:
