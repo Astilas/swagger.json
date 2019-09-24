@@ -1,4 +1,4 @@
-
+---
 swagger: '2.0'
 host: localhost:8080
 basePath: "/"
@@ -7,14 +7,15 @@ schemes:
 info:
   title: Koinju API Documentation
   version: 1.0.0
-tags:
+tags: []
 paths:
   "/crypto-data":
     get:
       summary: Crypto data endpoint
       operationId: getCryptodata
       description: Returns data about crypto currencies
-      tags: cryptos
+      tags:
+      - cryptos
       responses:
         default:
           schema:
@@ -25,7 +26,8 @@ paths:
       summary: Global data endpoint
       operationId: getGlobaldata
       description: Returns global data of crypto currencies market
-      tags: global
+      tags:
+      - global
       responses:
         default:
           schema:
@@ -36,7 +38,8 @@ paths:
       summary: All exchange instruments
       operationId: getInstruments
       description: Returns all current available instruments for all exchanges
-      tags: instruments
+      tags:
+      - instruments
       responses:
         '200':
           schema:
