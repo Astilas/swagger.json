@@ -42,6 +42,10 @@ paths:
       summary: All exchange instruments
       operationId: getInstruments
       description: Returns all current available instruments for all exchanges
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
       - instruments
       responses:
