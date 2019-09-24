@@ -30,13 +30,13 @@ paths:
       - application/json
     produces:
       - application/json
-      tags:
+    tags:
       - global
-      responses:
-        default:
-          schema:
-            type: string
-          description: Successful
+    responses:
+      default:
+        schema:
+          type: string
+        description: Successful
   "/instruments":
     get:
       summary: All exchange instruments
