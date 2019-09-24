@@ -51,10 +51,6 @@ paths:
       responses:
         '200':
           schema:
-            "$ref": "#/definitions/Instruments%20of%20all%20exchanges"
-          description: Successful
-        content:
-          application/json:
             type: array
             example:
             - exchange: kraken
@@ -66,7 +62,8 @@ paths:
               - BTC-USD
               - ETH-USD
             items:
-              "$ref": "#/definitions/Model1"
+              type: object
+          description: Successful
   "/status":
     get:
       summary: API status
