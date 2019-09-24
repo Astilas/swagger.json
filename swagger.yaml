@@ -59,7 +59,7 @@ paths:
    parameters: 
     - 
    type: string
-     description: "Exchange name"
+     description: Exchange name
      name: exchange
      in: path
      required: true
