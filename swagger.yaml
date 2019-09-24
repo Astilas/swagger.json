@@ -37,7 +37,7 @@ paths:
       tags:
       - global
       responses:
-        Default:
+        default:
           schema:
             type: string
           description: Successful
