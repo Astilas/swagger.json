@@ -61,6 +61,28 @@
 							"$ref": "#/definitions/Instruments%20of%20all%20exchanges"
 						},
 						"description": "Successful"
+					},
+					"application/json": {
+						"type": "array",
+						"example": [
+							{
+								"exchange": "kraken",
+								"instruments": [
+									"XBT-USD",
+									"ETH-USD"
+								]
+							},
+							{
+								"exchange": "binance",
+								"instruments": [
+									"BTC-USD",
+									"ETH-USD"
+								]
+							}
+						],
+						"items": {
+							"type": "object"
+						}
 					}
 				}
 			}
