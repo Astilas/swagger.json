@@ -9,7 +9,7 @@
 		"title": "Koinju API Documentation",
 		"version": "1.0.0",
 		"x-logo": {
-			"url": "",
+			"url": "https://raw.githubusercontent.com/Astilas/swagger.json/master/logo-full-white.svg",
 			"altText": "Petstore logo"
 		  }
 	},
