@@ -7,7 +7,11 @@
 	],
 	"info": {
 		"title": "Koinju API Documentation",
-		"version": "1.0.0"
+		"version": "1.0.0",
+		"x-logo": {
+			"url": "",
+			"altText": "Petstore logo"
+		  }
 	},
 	"tags": [],
 	"paths": {
