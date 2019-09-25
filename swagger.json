@@ -10,6 +10,7 @@
 		"version": "1.0.0",
 		"x-logo": {
 			"url": "https://redocly.github.io/redoc/petstore-logo.png",
+			"backgroundColor": "#141C22",
 			"altText": "Koinju logo"
 		  }
 	},
